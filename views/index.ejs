@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PubQuiz</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎉 Welcome to PubQuiz, <%= user.displayName %>!</h1>
+      <form action="/logout" method="post" class="logout-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="btn btn-outline">Log Out</button>
+      </form>
+    </header>
+
+    <main class="hero">
+      <p class="subtitle">Test your general knowledge with 10 fun questions.</p>
+      <a href="/quiz" class="btn btn-primary">Start Quiz</a>
+    </main>
+  </div>
+</body>
+</html>

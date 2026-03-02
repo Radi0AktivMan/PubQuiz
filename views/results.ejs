@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PubQuiz – Results</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Your Results</h1>
+    </header>
+
+    <main>
+      <div class="score-banner">
+        <span class="score-number"><%= score %> / <%= total %></span>
+        <span class="score-label">
+          <% if (score === total) { %>🏆 Perfect score!
+          <% } else if (score >= total * 0.7) { %>🎉 Great job!
+          <% } else if (score >= total * 0.4) { %>👍 Not bad!
+          <% } else { %>💪 Keep practising!<% } %>
+        </span>
+      </div>
+
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% results.forEach((r, i) => { %>
+            <tr class="<%= r.correct ? 'correct-row' : 'wrong-row' %>">
+              <td><%= i + 1 %></td>
+              <td><%= r.text %></td>
+              <td><%= r.userAnswer %></td>
+              <td><%= r.correctAnswer %></td>
+              <td><%= r.correct ? '✅' : '❌' %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+      <div class="result-actions">
+        <a href="/quiz" class="btn btn-primary">Play Again</a>
+        <a href="/" class="btn btn-outline">Home</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

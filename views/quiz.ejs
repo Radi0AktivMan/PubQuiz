@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PubQuiz – Question <%= currentIndex + 1 %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎯 PubQuiz</h1>
+      <span class="progress">Question <%= currentIndex + 1 %> of <%= totalQuestions %></span>
+    </header>
+
+    <main class="quiz-card">
+      <% const q = questions[currentIndex]; %>
+      <h2 class="question-text"><%= q.text %></h2>
+
+      <form action="/quiz/answer" method="post" class="options-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <input type="hidden" name="questionId" value="<%= q.id %>" />
+        <input type="hidden" name="currentIndex" value="<%= currentIndex %>" />
+
+        <div class="options">
+          <% q.options.forEach(option => { %>
+            <label class="option-label">
+              <input type="radio" name="answer" value="<%= option %>" required />
+              <span><%= option %></span>
+            </label>
+          <% }); %>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <%= currentIndex + 1 < totalQuestions ? 'Next Question →' : 'See Results' %>
+        </button>
+      </form>
+    </main>
+
+    <div class="progress-bar-container">
+      <div class="progress-bar" style="width: <%= ((currentIndex + 1) / totalQuestions * 100).toFixed(0) %>%"></div>
+    </div>
+  </div>
+</body>
+</html>
